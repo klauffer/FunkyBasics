@@ -2,39 +2,39 @@
 
 namespace FunkyBasics
 {
-    public abstract class Result
+    public abstract class BooleanResult
     {
         /// <summary>
         /// keep external classes from inheriting this
         /// </summary>
-        private Result() { }
+        private BooleanResult() { }
 
         /// <summary>
-        /// Exhaustively match on the <see cref="Result"/>.
+        /// Exhaustively match on the <see cref="BooleanResult"/>.
         /// </summary>
-        /// <typeparam name="T">The type to unify all cases of the <see cref="Result"/> to.</typeparam>
-        /// <param name="success">What to do if the <see cref="Result"/> was a success.</param>
-        /// <param name="error">What to do if the <see cref="Result"/> was a error.</param>
+        /// <typeparam name="T">The type to unify all cases of the <see cref="BooleanResult"/> to.</typeparam>
+        /// <param name="success">What to do if the <see cref="BooleanResult"/> was a success.</param>
+        /// <param name="error">What to do if the <see cref="BooleanResult"/> was a error.</param>
         /// <returns>The result of handling each case.</returns>
         public abstract T Match<T>(Func<T> success, Func<T> error);
 
 
-        public sealed class Success : Result
+        public sealed class Success : BooleanResult
         {
             public override T Match<T>(Func<T> success, Func<T> error) => success();
         }
 
-        public sealed class Error : Result
+        public sealed class Error : BooleanResult
         {
             public override T Match<T>(Func<T> success, Func<T> error) => error();
         }
 
-        public sealed class And : Result
+        public sealed class And : BooleanResult
         {
-            private readonly Result _left;
-            private readonly Result _right;
+            private readonly BooleanResult _left;
+            private readonly BooleanResult _right;
 
-            public And(Result left, Result right)
+            public And(BooleanResult left, BooleanResult right)
             {
                 _left = left;
                 _right = right;
@@ -46,12 +46,12 @@ namespace FunkyBasics
                                    () => error());
         }
 
-        public sealed class Or : Result
+        public sealed class Or : BooleanResult
         {
-            private readonly Result _left;
-            private readonly Result _right;
+            private readonly BooleanResult _left;
+            private readonly BooleanResult _right;
 
-            public Or(Result left, Result right)
+            public Or(BooleanResult left, BooleanResult right)
             {
                 _left = left;
                 _right = right;
