@@ -89,5 +89,21 @@ namespace FunkyBasics.Tests
             var result = new BooleanResult.Or(left, right);
             Assert.False(result.Match(() => true, () => false));
         }
+
+        [Fact]
+        public void HandleNotTrueToFalse()
+        {
+            var success = new BooleanResult.Success();
+            var result = new BooleanResult.Not(success);
+            Assert.False(result.Match(() => true, () => false));
+        }
+
+        [Fact]
+        public void HandleNotFalseToTrue()
+        {
+            var success = new BooleanResult.Error();
+            var result = new BooleanResult.Not(success);
+            Assert.True(result.Match(() => true, () => false));
+        }
     }
 }

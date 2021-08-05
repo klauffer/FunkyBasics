@@ -62,5 +62,18 @@ namespace FunkyBasics
                          () => _right.Match(() => success(),
                                             () => error()));
         }
+
+        public sealed class Not : BooleanResult
+        {
+            private readonly BooleanResult _booleanResult;
+
+            public Not(BooleanResult booleanResult)
+            {
+                _booleanResult = booleanResult;
+            }
+
+            public override T Match<T>(Func<T> success, Func<T> error) =>
+                _booleanResult.Match(() => error(), () => success());
+        }
     }
 }
