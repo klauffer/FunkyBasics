@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FunkyBasics
+namespace FunkyBasics.Boolean
 {
     public abstract class BooleanResult
     {

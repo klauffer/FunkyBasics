@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FunkyBasics
+namespace FunkyBasics.Maybe
 {
     public abstract class MaybeResult<T>
     {

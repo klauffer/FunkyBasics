@@ -1,3 +1,4 @@
+using FunkyBasics.Boolean;
 using Xunit;
 
 namespace FunkyBasics.Tests
