@@ -28,5 +28,39 @@ namespace FunkyBasics
         {
             public override T Match<T>(Func<T> success, Func<T> error) => error();
         }
+
+        public sealed class And : Result
+        {
+            private readonly Result _left;
+            private readonly Result _right;
+
+            public And(Result left, Result right)
+            {
+                _left = left;
+                _right = right;
+            }
+
+            public override T Match<T>(Func<T> success, Func<T> error) =>
+             _left.Match(() => _right.Match(() => success(), 
+                                            () => error()), 
+                                   () => error());
+        }
+
+        public sealed class Or : Result
+        {
+            private readonly Result _left;
+            private readonly Result _right;
+
+            public Or(Result left, Result right)
+            {
+                _left = left;
+                _right = right;
+            }
+
+            public override T Match<T>(Func<T> success, Func<T> error) =>
+             _left.Match(() => success(),
+                         () => _right.Match(() => success(),
+                                            () => error()));
+        }
     }
 }
