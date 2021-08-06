@@ -1,7 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>FunkyBasics</PackageId>
+    <Version>0.0.1-alpha</Version>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>Kyle Lauffer</Authors>
+    <Description>Functional Programming Inspired Objects</Description>
+    <RepositoryUrl>https://github.com/klauffer/FunkyBasics</RepositoryUrl>
+    <PackageTags>Functional; Programming; Church; Encoding; Boolean; Maybe;</PackageTags>
+    <Copyright>Copyright Kyle Lauffer</Copyright>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
 </Project>
