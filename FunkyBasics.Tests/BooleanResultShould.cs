@@ -6,24 +6,24 @@ namespace FunkyBasics.Tests
     public class BooleanResultShould
     {
         [Fact]
-        public void MatchSuccess()
+        public void MatchTrue()
         {
-            var result = new BooleanResult.Success();
+            var result = new BooleanResult.True();
             Assert.True(result.Match(() => true, () => false));
         }
 
         [Fact]
-        public void MatchError()
+        public void MatchFalse()
         {
-            var result = new BooleanResult.Error();
+            var result = new BooleanResult.False();
             Assert.True(result.Match(() => false, () => true));
         }
 
         [Fact]
         public void HandleAndTrueTrue()
         {
-            var left = new BooleanResult.Success();
-            var right = new BooleanResult.Success();
+            var left = new BooleanResult.True();
+            var right = new BooleanResult.True();
             var result = new BooleanResult.And(left, right);
             Assert.True(result.Match(()=> true, () => false));
         }
@@ -31,8 +31,8 @@ namespace FunkyBasics.Tests
         [Fact]
         public void HandleAndTrueFalse()
         {
-            var left = new BooleanResult.Success();
-            var right = new BooleanResult.Error();
+            var left = new BooleanResult.True();
+            var right = new BooleanResult.False();
             var result = new BooleanResult.And(left, right);
             Assert.False(result.Match(() => true, () => false));
         }
@@ -40,8 +40,8 @@ namespace FunkyBasics.Tests
         [Fact]
         public void HandleAndFalseTrue()
         {
-            var left = new BooleanResult.Error();
-            var right = new BooleanResult.Success();
+            var left = new BooleanResult.False();
+            var right = new BooleanResult.True();
             var result = new BooleanResult.And(left, right);
             Assert.False(result.Match(() => true, () => false));
         }
@@ -49,8 +49,8 @@ namespace FunkyBasics.Tests
         [Fact]
         public void HandleAndFalseFalse()
         {
-            var left = new BooleanResult.Error();
-            var right = new BooleanResult.Error();
+            var left = new BooleanResult.False();
+            var right = new BooleanResult.False();
             var result = new BooleanResult.And(left, right);
             Assert.False(result.Match(() => true, () => false));
         }
@@ -58,8 +58,8 @@ namespace FunkyBasics.Tests
         [Fact]
         public void HandleOrTrueTrue()
         {
-            var left = new BooleanResult.Success();
-            var right = new BooleanResult.Success();
+            var left = new BooleanResult.True();
+            var right = new BooleanResult.True();
             var result = new BooleanResult.Or(left, right);
             Assert.True(result.Match(() => true, () => false));
         }
@@ -67,8 +67,8 @@ namespace FunkyBasics.Tests
         [Fact]
         public void HandleOrTrueFalse()
         {
-            var left = new BooleanResult.Success();
-            var right = new BooleanResult.Error();
+            var left = new BooleanResult.True();
+            var right = new BooleanResult.False();
             var result = new BooleanResult.Or(left, right);
             Assert.True(result.Match(() => true, () => false));
         }
@@ -76,8 +76,8 @@ namespace FunkyBasics.Tests
         [Fact]
         public void HandleOrFalseTrue()
         {
-            var left = new BooleanResult.Error();
-            var right = new BooleanResult.Success();
+            var left = new BooleanResult.False();
+            var right = new BooleanResult.True();
             var result = new BooleanResult.Or(left, right);
             Assert.True(result.Match(() => true, () => false));
         }
@@ -85,8 +85,8 @@ namespace FunkyBasics.Tests
         [Fact]
         public void HandleOrFalseFalse()
         {
-            var left = new BooleanResult.Error();
-            var right = new BooleanResult.Error();
+            var left = new BooleanResult.False();
+            var right = new BooleanResult.False();
             var result = new BooleanResult.Or(left, right);
             Assert.False(result.Match(() => true, () => false));
         }
@@ -94,7 +94,7 @@ namespace FunkyBasics.Tests
         [Fact]
         public void HandleNotTrueToFalse()
         {
-            var success = new BooleanResult.Success();
+            var success = new BooleanResult.True();
             var result = new BooleanResult.Not(success);
             Assert.False(result.Match(() => true, () => false));
         }
@@ -102,7 +102,7 @@ namespace FunkyBasics.Tests
         [Fact]
         public void HandleNotFalseToTrue()
         {
-            var success = new BooleanResult.Error();
+            var success = new BooleanResult.False();
             var result = new BooleanResult.Not(success);
             Assert.True(result.Match(() => true, () => false));
         }
