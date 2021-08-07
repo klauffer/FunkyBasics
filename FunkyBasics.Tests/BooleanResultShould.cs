@@ -8,8 +8,8 @@ namespace FunkyBasics.Tests
         [Fact]
         public void MatchTrue()
         {
-            var result = new BooleanResult.True();
-            Assert.True(result.Match(() => true, () => false));
+            var booleanResult = new BooleanResult.True();
+            Assert.True(booleanResult.Match(() => true, () => false));
         }
 
         [Fact]
