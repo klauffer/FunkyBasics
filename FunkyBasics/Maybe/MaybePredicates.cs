@@ -1,4 +1,5 @@
-﻿using FunkyBasics.Boolean;
+﻿using System;
+using FunkyBasics.Boolean;
 
 namespace FunkyBasics.Maybe
 {
@@ -25,5 +26,17 @@ namespace FunkyBasics.Maybe
         /// <returns>returns a <see cref="BooleanResult.True"/> is this <see cref="MaybeResult{T}"/> is <see cref="MaybeResult{T}.Just"/></returns>
         public static BooleanResult IsJust<T>(this MaybeResult<T> maybe) =>
             new BooleanResult.Not(IsNothing(maybe));
+
+        /// <summary>
+        /// Maps a <see cref="MaybeResult{T}"/> to a <see cref="MaybeResult{TResult}"/>
+        /// </summary>
+        /// <typeparam name="T">the source type</typeparam>
+        /// <typeparam name="TResult">the resulting type</typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector">a function that maps from <typeparamref name="T"/> to <typeparamref name="TResult"/></param>
+        /// <returns><see cref="MaybeResult{TResult}"/></returns>
+        public static MaybeResult<TResult> Select<T, TResult>(this MaybeResult<T> source, Func<T, TResult> selector) =>
+            source.Match<MaybeResult<TResult>>(new MaybeResult<TResult>.Nothing(),
+                                               x => new MaybeResult<TResult>.Just(selector(x)));
     }
 }
