@@ -39,16 +39,16 @@ namespace FunkyBasics.Tests
         public void MapJustToAnotherType()
         {
             var maybeResult = new MaybeResult<bool>.Just(true);
-            var mappedResult = maybeResult.Select(x => x ? 1 : 0);
-            var answer = mappedResult.Match(3, x => x);
-            Assert.Equal(1, answer);
+            MaybeResult<string> mappedResult = maybeResult.Select(x => x ? "Correct Answer" : "Incorrect Answer");
+            var answer = mappedResult.Match("Another Incorrect Answer", x => x);
+            Assert.Equal("Correct Answer", answer);
         }
 
         [Fact]
         public void MapNothingToAnotherType()
         {
             var maybeResult = new MaybeResult<bool>.Nothing();
-            var mappedResult = maybeResult.Select(x => x ? 1 : 0);
+            MaybeResult<int> mappedResult = maybeResult.Select(x => x ? 1 : 0);
             var answer = mappedResult.Match(3, x => x);
             Assert.Equal(3, answer);
         }
