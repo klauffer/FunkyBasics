@@ -1,4 +1,5 @@
-﻿using FunkyBasics.Either;
+﻿using System;
+using FunkyBasics.Either;
 using Xunit;
 
 namespace FunkyBasics.Tests
@@ -30,6 +31,26 @@ namespace FunkyBasics.Tests
             var eitherResult = new EitherResult<double, int>.Right(expectedInt);
             EitherResult<string, string> mappedEitherResult = eitherResult.SelectBoth(x => x.ToString(),
                                                                                       y => y.ToString());
+        }
+
+        [Fact]
+        public void MapLeftSideToAnotherShape()
+        {
+            var myDouble = 1.5;
+            var eitherResult = new EitherResult<double, int>.Left(myDouble);
+            EitherResult<int, int> mappedEitherResult = eitherResult.SelectLeft(x => (int)Math.Ceiling(x));
+            var answer = mappedEitherResult.Match(x => x, y => y);
+            Assert.Equal(2, answer);
+        }
+
+        [Fact]
+        public void MapRightSideToAnotherShape()
+        {
+            var myInt = 1;
+            var eitherResult = new EitherResult<double, int>.Right(myInt);
+            EitherResult<double, string> mappedEitherResult = eitherResult.SelectRight(x => x.ToString());
+            var answer = mappedEitherResult.Match(x => x.ToString(), y => y);
+            Assert.Equal("1", answer);
         }
     }
 }
