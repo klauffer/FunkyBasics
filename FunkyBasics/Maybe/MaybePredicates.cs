@@ -28,7 +28,7 @@ namespace FunkyBasics.Maybe
             new BooleanResult.Not(IsNothing(maybe));
 
         /// <summary>
-        /// Maps a <see cref="MaybeResult{T}"/> to a <see cref="MaybeResult{TResult}"/>
+        /// a Functor that Maps a <see cref="MaybeResult{T}"/> to a <see cref="MaybeResult{TResult}"/>
         /// </summary>
         /// <typeparam name="T">the source type</typeparam>
         /// <typeparam name="TResult">the resulting type</typeparam>
