@@ -1,4 +1,5 @@
 ﻿using System;
+using FunkyBasics.Boolean;
 
 namespace FunkyBasics.Either
 {
@@ -53,5 +54,25 @@ namespace FunkyBasics.Either
             this EitherResult<L, R> source,
             Func<R, RResult> selectRight) =>
             source.SelectBoth(l => l, selectRight);
+
+        /// <summary>
+        /// indicates if the <see cref="EitherResult{L,R}"/> is <see cref="EitherResult{L,R}.Left"/>
+        /// </summary>
+        /// <typeparam name="L">the original left type</typeparam>
+        /// <typeparam name="R">the original right type</typeparam>
+        /// <param name="either"><see cref="EitherResult{L,R}"/></param>
+        /// <returns>a <see cref="BooleanResult"/></returns>
+        public static BooleanResult IsLeft<L, R>(this EitherResult<L, R> either) =>
+            either.Match<BooleanResult>(l => new BooleanResult.True(), r => new BooleanResult.False());
+
+        /// <summary>
+        /// indicates if the <see cref="EitherResult{L,R}"/> is <see cref="EitherResult{L,R}.Right"/>
+        /// </summary>
+        /// <typeparam name="L">the original left type</typeparam>
+        /// <typeparam name="R">the original right type</typeparam>
+        /// <param name="either"><see cref="EitherResult{L,R}"/></param>
+        /// <returns>a <see cref="BooleanResult"/></returns>
+        public static BooleanResult IsRight<L, R>(this EitherResult<L, R> either) =>
+            new BooleanResult.Not(IsLeft(either));
     }
 }

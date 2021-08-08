@@ -52,5 +52,23 @@ namespace FunkyBasics.Tests
             var answer = mappedEitherResult.Match(x => x.ToString(), y => y);
             Assert.Equal("1", answer);
         }
+
+        [Fact]
+        public void DetermineIsLeft()
+        {
+            var myInt = 1;
+            var either = new EitherResult<double, int>.Left(myInt);
+            var answer = either.IsLeft().Match(() => true, () => false);
+            Assert.True(answer);
+        }
+
+        [Fact]
+        public void DetermineIsRight()
+        {
+            var myInt = 1;
+            var either = new EitherResult<double, int>.Right(myInt);
+            var answer = either.IsRight().Match(() => true, () => false);
+            Assert.True(answer);
+        }
     }
 }
