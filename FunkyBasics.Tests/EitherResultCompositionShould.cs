@@ -34,6 +34,13 @@ namespace FunkyBasics.Tests
             Assert.Equal(ErrorMessages.NotBelow10, result.Match(l => l.ToString(), r => r));
         }
 
+        [Fact]
+        public void HandleMethodThatReturnsVoid()
+        {
+            var result = IsBelow10(5).Then(DoSomethingAndReturnNothing);
+            Assert.Equal(5, result.Match(l => l, r => 0));
+        }
+
         private static EitherResult<int, string> IsBelow10(int number)
         {
             if (number < 10)
@@ -61,6 +68,11 @@ namespace FunkyBasics.Tests
         private static EitherResult<int, string> MakeGreatSuccess(int number)
         {
             return number;
+        }
+
+        private static void DoSomethingAndReturnNothing(int number)
+        {
+            var x = number;
         }
 
         internal class ErrorMessages
