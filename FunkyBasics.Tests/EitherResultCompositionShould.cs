@@ -37,30 +37,30 @@ namespace FunkyBasics.Tests
         private static EitherResult<int, string> IsBelow10(int number)
         {
             if (number < 10)
-                return new EitherResult<int, string>.Left(number);
+                return number;
 
-            return new EitherResult<int, string>.Right(ErrorMessages.NotBelow10);
+            return ErrorMessages.NotBelow10;
         }
 
         private static EitherResult<int, string> IsAbove0(int number)
         {
             if (number > 0)
-                return new EitherResult<int, string>.Left(number);
+                return number;
 
-            return new EitherResult<int, string>.Right(ErrorMessages.NotAbove0);
+            return ErrorMessages.NotAbove0;
         }
 
         private static EitherResult<int, string> IsEven(int number)
         {
-            if (number%2 == 0)
-                return new EitherResult<int, string>.Left(number);
+            if (number % 2 == 0)
+                return number;
 
-            return new EitherResult<int, string>.Right(ErrorMessages.NotEven);
+            return ErrorMessages.NotEven;
         }
 
         private static EitherResult<int, string> MakeGreatSuccess(int number)
         {
-            return new EitherResult<int, string>.Left(number);
+            return number;
         }
 
         internal class ErrorMessages

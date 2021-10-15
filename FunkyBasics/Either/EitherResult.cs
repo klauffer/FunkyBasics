@@ -10,14 +10,19 @@ namespace FunkyBasics.Either
     public abstract class EitherResult<L, R>
     {
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="onLeft"></param>
-        /// <param name="onRight"></param>
-        /// <returns></returns>
         public abstract T Match<T>(Func<L, T> onLeft, Func<R, T> onRight);
+
+        /// <summary>
+        /// Implicit converters to allow for a return value of type <typeparamref name="L"/> to be instantiated into type <see cref="EitherResult{L,R}"/>
+        /// </summary>
+        /// <param name="value">value of type <typeparamref name="L"/></param>
+        public static implicit operator EitherResult<L, R>(L value) => new EitherResult<L, R>.Left(value);
+
+        /// <summary>
+        /// Implicit converters to allow for a return value of type <typeparamref name="R"/> to be instantiated into type <see cref="EitherResult{L,R}"/>
+        /// </summary>
+        /// <param name="value">value of type <typeparamref name="R"/></param>
+        public static implicit operator EitherResult<L, R>(R value) => new EitherResult<L, R>.Right(value);
 
         /// <summary>
         /// the left side of the <see cref="EitherResult{L,R}"/>
