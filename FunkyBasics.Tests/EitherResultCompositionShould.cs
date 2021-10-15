@@ -28,7 +28,7 @@ namespace FunkyBasics.Tests
         }
 
         [Fact]
-        public void ShortCircuitOnFirstOfTwoValidations()
+        public void ShortCircuitOnFirstOfTwoFailedValidations()
         {
             var result = IsBelow10(11).Then(IsEven).Then(MakeGreatSuccess);
             Assert.Equal(ErrorMessages.NotBelow10, result.Match(l => l.ToString(), r => r));
