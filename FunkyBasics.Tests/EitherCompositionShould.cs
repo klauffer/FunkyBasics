@@ -4,7 +4,7 @@ using Xunit;
 namespace FunkyBasics.Tests
 {
 
-    public class EitherResultCompositionShould
+    public class EitherCompositionShould
     {
         [Fact]
         public void RunFirstSuccessfully()
@@ -41,7 +41,7 @@ namespace FunkyBasics.Tests
             Assert.Equal(5, result.Match(l => l, r => 0));
         }
 
-        private static EitherResult<int, string> IsBelow10(int number)
+        private static Either<int, string> IsBelow10(int number)
         {
             if (number < 10)
                 return number;
@@ -49,7 +49,7 @@ namespace FunkyBasics.Tests
             return ErrorMessages.NotBelow10;
         }
 
-        private static EitherResult<int, string> IsAbove0(int number)
+        private static Either<int, string> IsAbove0(int number)
         {
             if (number > 0)
                 return number;
@@ -57,7 +57,7 @@ namespace FunkyBasics.Tests
             return ErrorMessages.NotAbove0;
         }
 
-        private static EitherResult<int, string> IsEven(int number)
+        private static Either<int, string> IsEven(int number)
         {
             if (number % 2 == 0)
                 return number;
@@ -65,7 +65,7 @@ namespace FunkyBasics.Tests
             return ErrorMessages.NotEven;
         }
 
-        private static EitherResult<int, string> MakeGreatSuccess(int number)
+        private static Either<int, string> MakeGreatSuccess(int number)
         {
             return number;
         }
