@@ -9,23 +9,23 @@ namespace FunkyBasics.Maybe
     public static class MaybePredicates
     {
         /// <summary>
-        /// returns a <see cref="Boolean.Boolean"/> indicating if the <see cref="Maybe{T}"/> is <see cref="Maybe{T}.Nothing"/>
+        /// returns a <see cref="Boolean.FunkyBoolean"/> indicating if the <see cref="Maybe{T}"/> is <see cref="Maybe{T}.Nothing"/>
         /// </summary>
         /// <typeparam name="T">The type inside of the <see cref="Maybe{T}"/></typeparam>
         /// <param name="maybe"><see cref="Maybe{T}"/> that is checked for the <see cref="Maybe{T}.Nothing"/> state</param>
-        /// <returns>returns a <see cref="Boolean.Boolean.True"/> is this <see cref="Maybe{T}"/> is <see cref="Maybe{T}.Nothing"/></returns>
-        public static Boolean.Boolean IsNothing<T>(this Maybe<T> maybe) =>
-            maybe.Match<Boolean.Boolean>(new Boolean.Boolean.True(), _ => new Boolean.Boolean.False());
+        /// <returns>returns a <see cref="Boolean.FunkyBoolean.True"/> is this <see cref="Maybe{T}"/> is <see cref="Maybe{T}.Nothing"/></returns>
+        public static Boolean.FunkyBoolean IsNothing<T>(this Maybe<T> maybe) =>
+            maybe.Match<Boolean.FunkyBoolean>(new Boolean.FunkyBoolean.True(), _ => new Boolean.FunkyBoolean.False());
 
 
         /// <summary>
-        /// returns a <see cref="Boolean.Boolean"/> indicating if the <see cref="Maybe{T}"/> is <see cref="Maybe{T}.Just"/>
+        /// returns a <see cref="Boolean.FunkyBoolean"/> indicating if the <see cref="Maybe{T}"/> is <see cref="Maybe{T}.Just"/>
         /// </summary>
         /// <typeparam name="T">The type inside of the <see cref="Maybe{T}"/></typeparam>
         /// <param name="maybe"><see cref="Maybe{T}"/> that is checked for the <see cref="Maybe{T}.Just"/> state</param>
-        /// <returns>returns a <see cref="Boolean.Boolean.True"/> is this <see cref="Maybe{T}"/> is <see cref="Maybe{T}.Just"/></returns>
-        public static Boolean.Boolean IsJust<T>(this Maybe<T> maybe) =>
-            new Boolean.Boolean.Not(IsNothing(maybe));
+        /// <returns>returns a <see cref="Boolean.FunkyBoolean.True"/> is this <see cref="Maybe{T}"/> is <see cref="Maybe{T}.Just"/></returns>
+        public static Boolean.FunkyBoolean IsJust<T>(this Maybe<T> maybe) =>
+            new Boolean.FunkyBoolean.Not(IsNothing(maybe));
 
         /// <summary>
         /// a Functor that Maps a <see cref="Maybe{T}"/> to a <see cref="Maybe{TResult}"/>

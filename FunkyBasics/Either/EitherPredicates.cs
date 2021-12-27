@@ -61,9 +61,9 @@ namespace FunkyBasics.Either
         /// <typeparam name="L">the original left type</typeparam>
         /// <typeparam name="R">the original right type</typeparam>
         /// <param name="either"><see cref="Either{L,R}"/></param>
-        /// <returns>a <see cref="Boolean.Boolean"/></returns>
-        public static Boolean.Boolean IsLeft<L, R>(this Either<L, R> either) =>
-            either.Match<Boolean.Boolean>(l => new Boolean.Boolean.True(), r => new Boolean.Boolean.False());
+        /// <returns>a <see cref="Boolean.FunkyBoolean"/></returns>
+        public static Boolean.FunkyBoolean IsLeft<L, R>(this Either<L, R> either) =>
+            either.Match<Boolean.FunkyBoolean>(l => new Boolean.FunkyBoolean.True(), r => new Boolean.FunkyBoolean.False());
 
         /// <summary>
         /// indicates if the <see cref="Either{L,R}"/> is <see cref="Either{L,R}.Right"/>
@@ -71,8 +71,8 @@ namespace FunkyBasics.Either
         /// <typeparam name="L">the original left type</typeparam>
         /// <typeparam name="R">the original right type</typeparam>
         /// <param name="either"><see cref="Either{L,R}"/></param>
-        /// <returns>a <see cref="Boolean.Boolean"/></returns>
-        public static Boolean.Boolean IsRight<L, R>(this Either<L, R> either) =>
-            new Boolean.Boolean.Not(IsLeft(either));
+        /// <returns>a <see cref="Boolean.FunkyBoolean"/></returns>
+        public static Boolean.FunkyBoolean IsRight<L, R>(this Either<L, R> either) =>
+            new Boolean.FunkyBoolean.Not(IsLeft(either));
     }
 }
