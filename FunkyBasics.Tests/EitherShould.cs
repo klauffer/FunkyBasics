@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using FunkyBasics.Either;
 using Xunit;
 
@@ -69,6 +70,15 @@ namespace FunkyBasics.Tests
             var either = new Either<double, int>.Right(myInt);
             var answer = either.IsRight().Match(() => true, () => false);
             Assert.True(answer);
+        }
+
+        [Fact]
+        public async Task HandleAsyncMethod()
+        {
+            var expectedInt = 1;
+            var either = new Either<string, int>.Right(expectedInt);
+            var answer = await either.Match(async x => await Task.FromResult(x), async y => await Task.FromResult(y.ToString()));
+            Assert.Equal(expectedInt.ToString(), answer);
         }
     }
 }

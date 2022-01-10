@@ -1,4 +1,5 @@
 ﻿using FunkyBasics.Either;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace FunkyBasics.Tests
@@ -41,6 +42,14 @@ namespace FunkyBasics.Tests
             Assert.Equal(5, result.Match(l => l, r => 0));
         }
 
+        [Fact]
+        public async Task HandlesAyncMethods()
+        {
+            var result = await IsAbove0Async(5).Then(MakeGreatSuccessAsync);
+            Assert.Equal(5, result.Match(l => l, r => 0));
+        }
+
+
         private static Either<int, string> IsBelow10(int number)
         {
             if (number < 10)
@@ -73,6 +82,22 @@ namespace FunkyBasics.Tests
         private static void DoSomethingAndReturnNothing(int number)
         {
             var x = number;
+        }
+
+        private static Task<Either<int, string>> IsAbove0Async(int number)
+        {
+            Either<int, string> result = new Either<int, string>.Right(ErrorMessages.NotAbove0);
+            if (number > 0)
+            {
+                result = new Either<int, string>.Left(number);
+            }
+            return Task.FromResult(result);
+        }
+
+        private static Task<Either<int, string>> MakeGreatSuccessAsync(int number)
+        {
+            Either<int, string> result = new Either<int, string>.Left(number);
+            return Task.FromResult(result);
         }
 
         internal class ErrorMessages
